@@ -1,6 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Timer from './timer/index';
+import Main from './timer/main';
 
-ReactDOM.render(<Timer/>, document.getElementById('root'));
+import {TimerStore} from './timer/TimerStore';
+import {useStrict} from 'mobx';
+
+useStrict(true);
+
+const timerStore = new TimerStore();
+
+ReactDOM.render(<div>
+    <Main
+        timerStore={timerStore}
+    />
+</div>, document.getElementById('root'));
 
