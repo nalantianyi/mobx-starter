@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
 // const svgDirs = [
 //     require.resolve('antd').replace(/warn\.js$/, ''), // 1. 属于 antd-mobile 内置 svg 文件
@@ -103,5 +104,15 @@ module.exports = {
                 return module.context && module.context.indexOf('node_modules') !== -1;
             }
         }),
+        new NyanProgressPlugin({
+            // 获取进度的时间间隔，默认 180 ms
+            debounceInterval: 60,
+            nyanCatSays (progress, messages) {
+                if (progress === 1) {
+                    // 当构建完成时，喊出「呦，又在写 Bug 了？」
+                    return '呦, 又在写 Bug 了?'
+                }
+            }
+        })
     ]
 };
